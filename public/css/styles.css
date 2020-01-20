@@ -7,6 +7,17 @@
 body{
   background-color: #FCC64F;
 }
+header{
+  margin-top: 20px;
+}
 #header-title{
-  color: red;
+  color: #d21e1e;
+  margin-top: 20px;
+}
+textarea{
+  margin-top: 40px;
+  width: 50%;
+}
+#hint{
+  font-size: 12px;
 }
