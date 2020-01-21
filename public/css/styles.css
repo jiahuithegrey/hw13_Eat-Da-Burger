@@ -17,7 +17,12 @@ header{
 textarea{
   margin-top: 40px;
   width: 50%;
+  padding-top: 20px;
+}
+.submit-btn{
+  margin-top: 10px;
 }
 #hint{
   font-size: 12px;
+  margin-top: 5px;
 }
