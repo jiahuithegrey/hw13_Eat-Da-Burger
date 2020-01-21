@@ -7,17 +7,17 @@ module.exports = function(app) {
   // GET route for getting all of burgers
   app.get("/api/burgers", function(req, res) {
     db.Burger.findAll({}).then(function(result) {
-      res.json(results);
+      res.json(result);
     });
   });
 
   // POST route for saving a new burger. You can create a burger using the data on req.body
   app.post("/api/burgers", function(req, res) {
     db.Burger.create({
-      burger_name: DataTypes.STRING,
-      devoured: DataTypes.BOOLEAN
-    }).then(function(results) {
-      res.json(results);
+      burger_name: req.body.text,
+      devoured: req.body.devoured
+    }).then(function(result) {
+      res.json(result);
     });
   });
 
@@ -35,8 +35,8 @@ module.exports = function(app) {
   // PUT route for updating burgers. The updated burger will be available in req.body
   app.put("/api/burgers", function(req, res) {
     db.Burger.update({
-      burger_name: DataTypes.STRING,
-      devoured: DataTypes.BOOLEAN
+      burger_name: req.body.text,
+      devoured: req.body.devoured
     },{
       where: {
         id: req.body.id
