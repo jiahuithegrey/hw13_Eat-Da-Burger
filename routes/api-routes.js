@@ -14,7 +14,7 @@ module.exports = function(app) {
   // POST route for saving a new burger. You can create a burger using the data on req.body
   app.post("/api/burgers", function(req, res) {
     db.Burger.create({
-      burger_name: req.body.text,
+      name: req.body.name,
       devoured: req.body.devoured
     }).then(function(result) {
       res.json(result);
@@ -35,7 +35,7 @@ module.exports = function(app) {
   // PUT route for updating burgers. The updated burger will be available in req.body
   app.put("/api/burgers", function(req, res) {
     db.Burger.update({
-      burger_name: req.body.text,
+      name: req.body.name,
       devoured: req.body.devoured
     },{
       where: {
