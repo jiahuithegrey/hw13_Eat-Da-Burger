@@ -36,11 +36,13 @@ function createNewRow(burger){
     let newBurgerRow = $(
         [
         "<li class='list-group-item new-burger'>",
+            burger.id,
+            ". ",
             "<span>",
             burger.name,
             "</span>",
             "<input type='text' style='display: none;'>",
-            "<button class='delete btn btn-danger' id='devour-btn'>Devour!</button>",
+            "<button class='delete btn btn-secondary' id='devour-btn'>Devour!</button>",
             "</li>"
         ].join("")
     );
@@ -61,7 +63,7 @@ function devourBurger(event){
     event.stopPropagation();
     let id = $(this).data("id"); //what does this mean?
     $.ajax({
-        method:"UPDATE",
+        method:"DELETE",
         url: "/api/burgers/" + id
     }).then(function(deletedBurger){
         getBurgers();
