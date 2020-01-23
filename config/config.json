@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "1990Lucky",
-    "database": "burgers_db",
+    "database": "burger",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": false
@@ -10,7 +10,7 @@
   "test": {
     "username": "root",
     "password": "1990Lucky",
-    "database": "burgers_db",
+    "database": "burger",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": false
@@ -18,7 +18,7 @@
   "production": {
     "username": "root",
     "password": "1990Lucky",
-    "database": "burgers_db",
+    "database": "burger",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": false

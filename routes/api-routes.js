@@ -37,10 +37,9 @@ module.exports = function(app) {
   });
 
   // PUT route for updating burgers. The updated burger will be available in req.body
-  app.put("/api/burgers", function(req, res) {
+  app.put("/api/burgers/:id", function(req, res) {
     db.Burger.update({
-      name: req.body.name,
-      devoured: req.body.devoured
+      devoured: true
     },{
       where: {
         id: req.body.id

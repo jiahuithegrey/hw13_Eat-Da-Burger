@@ -1,14 +1,18 @@
-let newBurgerEl = $(".new-burger");
+let newBurgerEl = $("#new-burger");
 let burgerContainerEl = $(".burger-container");
 
 //add event listeners for getting, deleting and editing burgers
-$("#submit-btn").on("click", addBurger);
-$("#devour-btn").on("click", devourBurger);
+$(".submit-btn").on("click", addBurger);
+
 
  // initial burgers array
 let burgers = [];
+
+let devouredBurgers = [];
  // Getting burgers from database when page loads
 getBurgers();
+
+// $("#devour-btn").on("click", devourBurger);
 
 //get burgers from the database and updates the view
 function getBurgers(){
@@ -41,6 +45,9 @@ function createNewRow(burger){
         ].join("")
     );
     newBurgerRow.find("#devour-btn").data("id", burger.id);
+
+    newBurgerRow.find("#devour-btn").click(devourBurger);
+
     newBurgerRow.data("burger",burger);
     if (burger.complete) {
         newBurgerRow.find("span").css("text-decoration", "line-through");
@@ -50,12 +57,16 @@ function createNewRow(burger){
 
 //delete a burger when clicking the devour button
 function devourBurger(event){
+    console.log("devourBurger fired");
     event.stopPropagation();
     let id = $(this).data("id"); //what does this mean?
     $.ajax({
-        method:"DELETE",
+        method:"UPDATE",
         url: "/api/burgers/" + id
-    }).then(getBurgers);
+    }).then(function(deletedBurger){
+        getBurgers();
+        console.log(deletedBurger);
+    });
 }
 
 //add a new burger into database then update the view
@@ -66,6 +77,6 @@ function addBurger(event){
       devour: false
     };
 
-    $.post("/api/burgers", burger, getburgers);
-    newBurgerEl.val("");
+    $.post("/api/burgers", burger, getBurgers);
+    newBurgerEl.val(""); //set input empty
   }
