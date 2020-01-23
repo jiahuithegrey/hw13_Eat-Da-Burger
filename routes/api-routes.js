@@ -4,6 +4,10 @@ var db = require("../models");
 
 // Routes
 module.exports = function(app) {
+  app.get("/", function(req,res){
+    res.render("index");
+  });
+
   // GET route for getting all of burgers
   app.get("/api/burgers", function(req, res) {
     db.Burger.findAll({}).then(function(result) {
