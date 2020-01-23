@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     devoured: {
       type: DataTypes.BOOLEAN,
-      dafaultValue: false
+      defaultValue: false
     }
   });
   return Burger;

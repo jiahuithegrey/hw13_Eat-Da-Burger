@@ -8,9 +8,14 @@
     {{!-- left: burger to be devoured --}}
     <div class="col-sm-12 col-md-6">
       <ul class="list-group burger-list">
-        <li class="list-group-item new-burger">
+        {{!-- <li class="list-group-item new-burger">
 
-        </li>
+        </li> --}}
+        {{#each burgers}}
+          {{#if false}}
+            {{>burger/burger-block devoured=false}}
+          {{/if}}
+        {{/each}}
         <span class="burger-container"> </span>
       </ul>
     </div>
@@ -18,6 +23,11 @@
      {{!-- right: burger devoured --}}
     <div class="col-sm-12 col-md-6">
       <ul class="list-group burger-list">
+        {{#each burgers}}
+          {{#if false}}
+            {{>burger/burger-block devoured=false}}
+          {{/if}}
+        {{/each}}
         <span class="burger-devoured"> </span>
       </ul>
     </div>
