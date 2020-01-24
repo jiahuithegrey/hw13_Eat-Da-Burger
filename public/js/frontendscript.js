@@ -67,7 +67,7 @@ function createNewRow(burger) {
 //UPDATE a burger to 'devour: true' when clicking the devour button--------------------------------------
 function devourBurger(event) {
   console.log("devourBurger fired"); //----works
-  event.stopPropagation();
+  event.preventDefault();
 
   let id = $(this).data("id"); //what does this mean?
   $.ajax({
@@ -75,7 +75,8 @@ function devourBurger(event) {
     url: "/api/burgers/" + id,
     data: {"devoured": true}
   }).then(getBurgers)
-  console.log(this.devoured); //----undefined
+  console.log(id);
+  console.log($(this).devoured); //----undefined
 }
 
 //add a new burger into database then update the view

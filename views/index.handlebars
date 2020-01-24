@@ -10,6 +10,7 @@
       <ul class="list-group burger-list">
         <span class="burger-container">
 
+          {{!-- does it need these #each #if? --}}
         {{#each burgers}}
           {{#if false}}
             {{>burger/burger-block devoured=false}}
@@ -23,13 +24,14 @@
      {{!-- right: burger devoured --}}
     <div class="col-sm-12 col-md-6">
       <ul class="list-group burger-list">
-
         <span class="devoured-burgers-container">
+
         {{#each burgers}}
           {{!-- {{#if true}}
             {{>burger/burger-block devoured=true}}
           {{/if}} --}}
         {{/each}}
+        
          </span>
       </ul>
     </div>
