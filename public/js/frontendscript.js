@@ -3,8 +3,8 @@ let burgerContainerEl = $(".burger-container");
 let devouredBurgersEl = $(".devoured-burgers-container");
 
 //add event listeners for getting, deleting and editing burgers
-$(".submit-btn").on("click", addBurger);
-$("#devour-btn").on("click", devourBurger);
+$("button.insert").on("click", addBurger);
+$("button.delete").on("click", devourBurger);
 
 // initial burgers array
 let burgers = [];
@@ -28,7 +28,7 @@ function initializeRows() {
   let devouredBurgers = [];
 
   for (let i = 0; i < burgers.length; i++) {
-    if (burgers[i].devour === true) {
+    if (burgers[i].devoured === true) {
       devouredBurgers.push(createDevouredRow(burgers[i]));
     } else {
       undevouredBurgers.push(createNewRow(burgers[i]));
@@ -56,27 +56,26 @@ function createNewRow(burger) {
 
   //The find() method returns the value of the first element in the provided array
   //that satisfies the provided testing function.
-  newBurgerRow.find("#devour-btn").data("id", burger.id);
-
-  // newBurgerRow.find("#devour-btn").click(devourBurger);
-
+  newBurgerRow.find("button.delete").data("id", burger.id);
   newBurgerRow.data("burger", burger); //what does this mean?????
+
+  newBurgerRow.find("button.delete").click(devourBurger);
 
   return newBurgerRow;
 }
 
-//delete a burger when clicking the devour button
+//UPDATE a burger to 'devour: true' when clicking the devour button--------------------------------------
 function devourBurger(event) {
-  console.log("devourBurger fired");
+  console.log("devourBurger fired"); //----works
   event.stopPropagation();
+
   let id = $(this).data("id"); //what does this mean?
   $.ajax({
-    method: "DELETE",
-    url: "/api/burgers/" + id
-  }).then(function(deletedBurger) {
-    getBurgers();
-    console.log(deletedBurger);
-  });
+    method: "PUT",
+    url: "/api/burgers/" + id,
+    data: {"devoured": true}
+  }).then(getBurgers)
+  console.log(this.devoured); //----undefined
 }
 
 //add a new burger into database then update the view
