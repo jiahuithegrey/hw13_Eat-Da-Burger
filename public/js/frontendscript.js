@@ -5,7 +5,7 @@ let devouredBurgersEl = $(".devoured-burgers-container");
 //add event listeners for getting, deleting and editing burgers
 $("button.insert").on("click", addBurger);
 $("button.devour").on("click", devourBurger);
-$("button.delete").on("click", deleteDevoured);
+$(devouredBurgersEl).on("click", "button.delete", deleteDevoured);
 
 // initial burgers array
 let burgers = [];
@@ -93,16 +93,16 @@ function createDevouredRow(burger) {
   let devourBurgerRow = $("<div class='row devour-row justify-content-between'>");
   let devouredBurgerItem = $("<p class='devour-burger'>").text(burger.id + ". " + burger.name);
   let deleteBtn = $("<button type='button' class='delete btn btn-primary btn-sm float-right'>x</button>");
-
+  $(deleteBtn).on("click", deleteDevoured);
   devourBurgerRow.append(devouredBurgerItem, deleteBtn);
   return devourBurgerRow;
 }
 
 function deleteDevoured(event){
   event.stopPropagation(); //-----------difference between event.preventDefault();
-  // console.log("delete fired");
+  console.log("delete fired");
   let id = $(this).data("id"); //what's data?
-  // console.log(id);
+  console.log(id);
 
   $.ajax({
     method: "DELETE",
