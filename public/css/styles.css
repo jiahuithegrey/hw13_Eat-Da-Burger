@@ -50,6 +50,6 @@ button{
 .devour-row{
   border: 1px solid red;
 }
-.delete-btn{
+button.delete{
   border: 1px solid black;
 }

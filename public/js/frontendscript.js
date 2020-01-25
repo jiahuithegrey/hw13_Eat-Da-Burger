@@ -4,7 +4,8 @@ let devouredBurgersEl = $(".devoured-burgers-container");
 
 //add event listeners for getting, deleting and editing burgers
 $("button.insert").on("click", addBurger);
-$("button.delete").on("click", devourBurger);
+$("button.devour").on("click", devourBurger);
+$("button.delete").on("click", deleteDevoured);
 
 // initial burgers array
 let burgers = [];
@@ -43,24 +44,23 @@ function createNewRow(burger) {
   let newBurgerRow = $("<div class='row justify-content-between'>");
 
   let burgerItem = $("<p class='burger-item text-center'>").text(burger.id + ". " + burger.name);
-  let devourBtn = $("<button class='delete bg-light text-dark'>Devour it!</button>");
+  let devourBtn = $("<button class='devour bg-light text-dark'>Devour it!</button>");
 
   newBurgerRow.append(burgerItem, devourBtn);
   burgerContainerEl.append(newBurgerRow);
 
   //find() method returns the value of the first element in the provided array ???????????????????
   //that satisfies the provided testing function.
-  newBurgerRow.find("button.delete").data("id", burger.id);
+  newBurgerRow.find("button.devour").data("id", burger.id);
   newBurgerRow.data("burger", burger); //what does this mean?????
 
-  newBurgerRow.find("button.delete").click(devourBurger);
+  newBurgerRow.find("button.devour").click(devourBurger);
 
   return newBurgerRow;
 }
 
 //UPDATE a burger to 'devour: true' when clicking the devour button
 function devourBurger(event) {
-  
   event.preventDefault();
 
   let id = $(this).data("id"); //what does this mean?
@@ -74,6 +74,7 @@ function devourBurger(event) {
 //add a new burger into database then update the view
 function addBurger(event) {
   event.preventDefault();
+
   let burger = {
     name: newBurgerEl.val().trim(),
     devour: false
@@ -86,11 +87,25 @@ function addBurger(event) {
 function createDevouredRow(burger) {
   let devourBurgerRow = $("<div class='row devour-row justify-content-between'>");
   let devouredBurgerItem = $("<p class='devour-burger'>").text(burger.id + ". " + burger.name);
-  let deleteBtn = $("<button class='delete-btn bg-light text-dark'>x</button>");
+  let deleteBtn = $("<button class='delete bg-light text-dark'>x</button>");
 
   devourBurgerRow.append(devouredBurgerItem, deleteBtn);
   return devourBurgerRow;
 }
+
+function deleteDevoured(event){
+  event.stopPropagation(); //-----------why?
+    console.log("delete fired");
+
+  let id = $(this).data("id"); //what's data?
+    console.log(id);
+  $.ajax({
+    method: "DELETE",
+    url: "/api/burgers/" + id,
+    // data: { devoured: true }
+  }).then(getBurgers);
+}
+
 
 // let burgerItem = [
   //   burger.id,

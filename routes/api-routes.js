@@ -25,17 +25,6 @@ module.exports = function(app) {
     });
   });
 
-  // DELETE route for deleting burgers. You can access the burger's id in req.params.id
-  // app.delete("/api/burgers/:id", function(req, res) {
-  //   db.Burger.destroy({
-  //     where:{
-  //       id:req.params.id
-  //     }
-  //   }).then(function(dbBurger){
-  //     res.json(dbBurger);
-  //   });
-  // });
-
   // PUT route for updating burgers. The updated burger will be available in req.body
   app.put("/api/burgers/:id", function(req, res) {
     db.Burger.update({
@@ -43,6 +32,17 @@ module.exports = function(app) {
     },{
       where: {
         id: req.params.id
+      }
+    }).then(function(dbBurger){
+      res.json(dbBurger);
+    });
+  });
+
+// DELETE route for deleting burgers. You can access the burger's id in req.params.id
+  app.delete("/api/burgers/:id", function(req, res) {
+    db.Burger.destroy({
+      where:{
+        id:req.params.id
       }
     }).then(function(dbBurger){
       res.json(dbBurger);
