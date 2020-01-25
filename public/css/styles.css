@@ -10,14 +10,20 @@ body{
 header{
   margin-top: 20px;
 }
+#header-img{
+  width: 20%;
+}
 #header-title{
   color: #d21e1e;
   margin-top: 20px;
 }
 textarea{
-  margin-top: 40px;
+  margin-top: 15px;
   width: 50%;
   padding-top: 20px;
+}
+.line{
+  border-bottom: 1px solid black;
 }
 .submit-btn{
   margin-top: 10px;

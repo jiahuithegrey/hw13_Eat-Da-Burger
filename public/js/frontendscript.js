@@ -39,22 +39,25 @@ function initializeRows() {
 }
 
 //makes a new burger row
+// var pOne = $("<h5>").html("Beer Name :  " + name);
 function createNewRow(burger) {
-  let newBurgerRow = $(
-    [
-      "<li class='list-group-item new-burger'>",
-      burger.id,
-      ". ",
-      "<span>",
-      burger.name,
-      "</span>",
-      "<input type='text' style='display: none;'>",
-      "<button class='delete btn btn-secondary' id='devour-btn'>Devour it!</button>",
-      "</li>"
-    ].join("")
+  let newBurgerRow = $("<div>");
+  
+  let burgerItem = [
+    burger.id,
+    ". ",
+    "<span>",
+    burger.name,
+    "</span>",
+    "<input type='text' style='display: none;'>"
+  ].join("");
+  let devourBtn = $(
+    "<button class='delete btn btn-secondary' id='devour-btn'>Devour it!</button>"
   );
 
-  //The find() method returns the value of the first element in the provided array
+  newBurgerRow.append(burgerItem, devourBtn);
+
+  //find() method returns the value of the first element in the provided array
   //that satisfies the provided testing function.
   newBurgerRow.find("button.delete").data("id", burger.id);
   newBurgerRow.data("burger", burger); //what does this mean?????
@@ -66,17 +69,15 @@ function createNewRow(burger) {
 
 //UPDATE a burger to 'devour: true' when clicking the devour button--------------------------------------
 function devourBurger(event) {
-  console.log("devourBurger fired"); //----works
+  // console.log("devourBurger fired"); 
   event.preventDefault();
 
   let id = $(this).data("id"); //what does this mean?
   $.ajax({
     method: "PUT",
     url: "/api/burgers/" + id,
-    data: {"devoured": true}
-  }).then(getBurgers)
-  console.log(id);
-  console.log($(this).devoured); //----undefined
+    data: { devoured: true }
+  }).then(getBurgers);
 }
 
 //add a new burger into database then update the view
@@ -92,18 +93,21 @@ function addBurger(event) {
 }
 
 function createDevouredRow(burger) {
-  let devouredBurgerRow = $(
-    [
-      "<li class='list-group-item devoured-burger'>",
-      burger.id,
-      ". ",
-      "<span>",
-      burger.name,
-      "</span>",
-      "<input type='text' style='display: none;'>",
-      "</li>"
-    ].join("")
-  );
-  devouredBurgerRow.data("burger",burger);
-  return devouredBurgerRow;
+  let devourBurgerRow = $("<div>");
+  let devouredBurgerItem = $("<p>").text(burger.id + ". " + burger.name);
+  let deleteBtn = $("<button class='delete btn btn-light'>Delete</button>");
+
+  devourBurgerRow.append(devouredBurgerItem, deleteBtn);
+  return devourBurgerRow;
 }
+
+// let burgerItem = [
+  //   burger.id,
+  //   ". ",
+  //   "<span>",
+  //   burger.name,
+  //   "</span>",
+  //   "<input type='text' style='display: none;'>"
+  // ].join("");
+  // newBurgerRow.append(burgerItem, devourBtn);
+  // devouredBurgerRow.data("burger", burger);

@@ -4,6 +4,25 @@
 </header>
 
 <div class="container">
+  {{!-- burger input --}}
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <textarea placeholder="What burger do you want?" rows="3" class="text-center"
+        id="new-burger"></textarea>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <button class="insert btn btn-success submit-btn" type="submit">Submit</button>
+    </div>
+  </div>
+  <div class="row line">
+    <div class="col-sm-12 text-center">
+      <p id="hint">Enter a burger you want to eat<br>
+        Click the "Submit" button.</p>
+    </div>
+  </div>
+
   <div class="row">
     {{!-- left: burger to be devoured --}}
     <div class="col-sm-12 col-md-6">
@@ -21,7 +40,7 @@
       </ul>
     </div>
 
-     {{!-- right: burger devoured --}}
+    {{!-- right: burger devoured --}}
     <div class="col-sm-12 col-md-6">
       <ul class="list-group burger-list">
         <span class="devoured-burgers-container">
@@ -34,29 +53,8 @@
         
          </span>
       </ul>
-    </div>
-      
+    </div> 
   </div>
-
-  {{!-- burger input --}}
-  <div class="row">
-    <div class="col-sm-12 text-center">
-      <textarea placeholder="What burger do you want?" rows="5" class="text-center"
-        id="new-burger"></textarea>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12 text-center">
-      <button class="insert btn btn-success submit-btn" type="submit">Submit</button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12 text-center">
-      <p id="hint">Enter a burger you want to eat<br>
-        Click the "Submit" button.</p>
-    </div>
-  </div>
-
 </div>
 
 <script src="./js/frontendscript.js"></script>
