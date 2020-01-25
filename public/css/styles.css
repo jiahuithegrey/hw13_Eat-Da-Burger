@@ -1,8 +1,6 @@
 * {
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
-  padding: 0;
-  margin: 0;
 }
 body{
   background-color: #FCC64F;
@@ -11,7 +9,7 @@ header{
   margin-top: 20px;
 }
 #header-img{
-  width: 20%;
+  width: 10%;
 }
 #header-title{
   color: #d21e1e;
@@ -31,4 +29,27 @@ textarea{
 #hint{
   font-size: 12px;
   margin-top: 5px;
+}
+.burger-item{
+  background-color: white;
+  width: 60%;
+  padding: 30px auto;
+  margin-bottom: 0px;
+}
+button{
+  padding: 5px 5px;
+  border: none;
+}
+.devour-row{
+  background-color: lightgray;
+}
+.devour-burger{
+  padding: auto 10px;
+  margin: 0;
+}
+.devour-row{
+  border: 1px solid red;
+}
+.delete-btn{
+  border: 1px solid black;
 }

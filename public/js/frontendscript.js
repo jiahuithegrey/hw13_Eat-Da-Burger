@@ -34,30 +34,21 @@ function initializeRows() {
       undevouredBurgers.push(createNewRow(burgers[i]));
     }
   }
-  burgerContainerEl.append(undevouredBurgers);
+  burgerContainerEl.append(undevouredBurgers); //difference between undervouredBurgers and newBurgerRow???????
   devouredBurgersEl.append(devouredBurgers);
 }
 
 //makes a new burger row
-// var pOne = $("<h5>").html("Beer Name :  " + name);
 function createNewRow(burger) {
-  let newBurgerRow = $("<div>");
-  
-  let burgerItem = [
-    burger.id,
-    ". ",
-    "<span>",
-    burger.name,
-    "</span>",
-    "<input type='text' style='display: none;'>"
-  ].join("");
-  let devourBtn = $(
-    "<button class='delete btn btn-secondary' id='devour-btn'>Devour it!</button>"
-  );
+  let newBurgerRow = $("<div class='row justify-content-between'>");
+
+  let burgerItem = $("<p class='burger-item text-center'>").text(burger.id + ". " + burger.name);
+  let devourBtn = $("<button class='delete bg-light text-dark'>Devour it!</button>");
 
   newBurgerRow.append(burgerItem, devourBtn);
+  burgerContainerEl.append(newBurgerRow);
 
-  //find() method returns the value of the first element in the provided array
+  //find() method returns the value of the first element in the provided array ???????????????????
   //that satisfies the provided testing function.
   newBurgerRow.find("button.delete").data("id", burger.id);
   newBurgerRow.data("burger", burger); //what does this mean?????
@@ -67,9 +58,9 @@ function createNewRow(burger) {
   return newBurgerRow;
 }
 
-//UPDATE a burger to 'devour: true' when clicking the devour button--------------------------------------
+//UPDATE a burger to 'devour: true' when clicking the devour button
 function devourBurger(event) {
-  // console.log("devourBurger fired"); 
+  
   event.preventDefault();
 
   let id = $(this).data("id"); //what does this mean?
@@ -93,9 +84,9 @@ function addBurger(event) {
 }
 
 function createDevouredRow(burger) {
-  let devourBurgerRow = $("<div>");
-  let devouredBurgerItem = $("<p>").text(burger.id + ". " + burger.name);
-  let deleteBtn = $("<button class='delete btn btn-light'>Delete</button>");
+  let devourBurgerRow = $("<div class='row devour-row justify-content-between'>");
+  let devouredBurgerItem = $("<p class='devour-burger'>").text(burger.id + ". " + burger.name);
+  let deleteBtn = $("<button class='delete-btn bg-light text-dark'>x</button>");
 
   devourBurgerRow.append(devouredBurgerItem, deleteBtn);
   return devourBurgerRow;
