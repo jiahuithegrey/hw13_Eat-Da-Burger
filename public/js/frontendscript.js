@@ -44,7 +44,7 @@ function createNewRow(burger) {
   let newBurgerRow = $("<div class='row justify-content-between'>");
 
   let burgerItem = $("<p class='burger-item text-center'>").text(burger.id + ". " + burger.name);
-  let devourBtn = $("<button class='devour bg-light text-dark'>Devour it!</button>");
+  let devourBtn = $("<button type='button' class='btn btn-primary btn-sm float-right devour'>Devour it!</button>");
 
   newBurgerRow.append(burgerItem, devourBtn);
   burgerContainerEl.append(newBurgerRow);
@@ -79,30 +79,34 @@ function addBurger(event) {
     name: newBurgerEl.val().trim(),
     devour: false
   };
+  $.ajax({
+    method: "POST",
+    url: "/api/burgers", //-----what is burgers?????????
+    data: burger
+  }).then(getBurgers);
 
-  $.post("/api/burgers", burger, getBurgers);
+  // $.post("/api/burgers", burger, getBurgers); ----simpler ajax call?
   newBurgerEl.val(""); //set input empty
 }
 
 function createDevouredRow(burger) {
   let devourBurgerRow = $("<div class='row devour-row justify-content-between'>");
   let devouredBurgerItem = $("<p class='devour-burger'>").text(burger.id + ". " + burger.name);
-  let deleteBtn = $("<button class='delete bg-light text-dark'>x</button>");
+  let deleteBtn = $("<button type='button' class='delete btn btn-primary btn-sm float-right'>x</button>");
 
   devourBurgerRow.append(devouredBurgerItem, deleteBtn);
   return devourBurgerRow;
 }
 
 function deleteDevoured(event){
-  event.stopPropagation(); //-----------why?
-    console.log("delete fired");
-
+  event.stopPropagation(); //-----------difference between event.preventDefault();
+  // console.log("delete fired");
   let id = $(this).data("id"); //what's data?
-    console.log(id);
+  // console.log(id);
+
   $.ajax({
     method: "DELETE",
     url: "/api/burgers/" + id,
-    // data: { devoured: true }
   }).then(getBurgers);
 }
 

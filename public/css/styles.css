@@ -5,27 +5,25 @@
 body{
   background-color: #FCC64F;
 }
-header{
-  margin-top: 20px;
+.container{
+  background-color: #fef0d5;
+  min-height: 100vh;
 }
-#header-img{
-  width: 10%;
-}
+/* #header-img{
+  width: 20%;
+} */
 #header-title{
   color: #d21e1e;
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 textarea{
   margin-top: 15px;
   width: 50%;
   padding-top: 20px;
 }
-.line{
-  border-bottom: 1px solid black;
-}
-.submit-btn{
+/* .submit-btn{
   margin-top: 10px;
-}
+} */
 #hint{
   font-size: 12px;
   margin-top: 5px;
@@ -35,10 +33,6 @@ textarea{
   width: 60%;
   padding: 30px auto;
   margin-bottom: 0px;
-}
-button{
-  padding: 5px 5px;
-  border: none;
 }
 .devour-row{
   background-color: lightgray;
@@ -52,4 +46,13 @@ button{
 }
 button.delete{
   border: 1px solid black;
+}
+.btn {
+  background-color: #d5e3fe;
+  border-color: #a3c2fd;
+  color: black;
+}
+.btn:hover {
+  background-color: #a3c2fd;
+  border-color: #a3c2fd;
 }
