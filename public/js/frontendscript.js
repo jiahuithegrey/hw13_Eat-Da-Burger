@@ -93,15 +93,15 @@ function createDevouredRow(burger) {
   let devourBurgerRow = $("<div class='row devour-row justify-content-between'>");
   let devouredBurgerItem = $("<p class='devour-burger'>").text(burger.id + ". " + burger.name);
   let deleteBtn = $("<button type='button' class='delete btn btn-primary btn-sm float-right'>x</button>");
-  $(deleteBtn).on("click", deleteDevoured);
+  $(deleteBtn).data("burger-id", burger.id);
   devourBurgerRow.append(devouredBurgerItem, deleteBtn);
   return devourBurgerRow;
 }
 
 function deleteDevoured(event){
-  event.stopPropagation(); //-----------difference between event.preventDefault();
+  event.stopPropagation(); //-----won't affect the parent element
   console.log("delete fired");
-  let id = $(this).data("id"); //what's data?
+  let id = $(this).data("burger-id"); //what's data?
   console.log(id);
 
   $.ajax({
