@@ -1,11 +1,12 @@
 let newBurgerEl = $("#new-burger");
 let burgerContainerEl = $(".burger-container");
-let devouredBurgersEl = $(".devoured-burgers-container");
+let devouredContainerEl = $(".devoured-container");
 
 //add event listeners for getting, deleting and editing burgers
 $("button.insert").on("click", addBurger);
-$("button.devour").on("click", devourBurger);
-$(devouredBurgersEl).on("click", "button.delete", deleteDevoured);
+// $("button.devour").on("click", devourBurger);
+$(burgerContainerEl).on("click", "button.devour", devourBurger);
+$(devouredContainerEl).on("click", "button.delete", deleteDevoured);
 
 // initial burgers array
 let burgers = [];
@@ -23,52 +24,48 @@ function getBurgers() {
 // resets the burgers displayed with new burgers from the database
 function initializeRows() {
   burgerContainerEl.empty();
-  devouredBurgersEl.empty();
-
-  let undevouredBurgers = [];
-  let devouredBurgers = [];
+  devouredContainerEl.empty();
 
   for (let i = 0; i < burgers.length; i++) {
-    if (burgers[i].devoured === true) {
-      devouredBurgers.push(createDevouredRow(burgers[i]));
+    if (burgers[i].devoured === false) {
+      burgerContainerEl.push(createNewRow(burgers[i]));
     } else {
-      undevouredBurgers.push(createNewRow(burgers[i]));
+      devouredContainerEl.push(createDevouredRow(burgers[i]));
     }
   }
-  burgerContainerEl.append(undevouredBurgers); //difference between undervouredBurgers and newBurgerRow???????
-  devouredBurgersEl.append(devouredBurgers);
 }
 
 //makes a new burger row
 function createNewRow(burger) {
-  let newBurgerRow = $("<div class='row justify-content-between'>");
+  let newBurgerLi = $("<li class='row justify-content-between px-3 my-2'>");
 
   let burgerItem = $("<p class='burger-item text-center'>").text(burger.id + ". " + burger.name);
   let devourBtn = $("<button type='button' class='btn btn-primary btn-sm float-right devour'>Devour it!</button>");
 
-  newBurgerRow.append(burgerItem, devourBtn);
-  burgerContainerEl.append(newBurgerRow);
+  newBurgerLi.append(burgerItem, devourBtn);
+  burgerContainerEl.append(newBurgerLi);
 
   //find() method returns the value of the first element in the provided array ???????????????????
   //that satisfies the provided testing function.
-  newBurgerRow.find("button.devour").data("id", burger.id);
-  newBurgerRow.data("burger", burger); //what does this mean?????
+  newBurgerLi.find("button.devour").data("id", burger.id);
+  newBurgerLi.data("burger", burger); //what does this mean?????
 
-  newBurgerRow.find("button.devour").click(devourBurger);
+  newBurgerLi.find("button.devour").click(devourBurger);
 
-  return newBurgerRow;
+  return newBurgerLi;
 }
 
-//UPDATE a burger to 'devour: true' when clicking the devour button
-function devourBurger(event) {
-  event.preventDefault();
+function createDevouredRow(burger) {
+  let devouredBurgerLi = $("<li class='row devour-row justify-content-between px-3 my-2'>");
+  let devouredBurgerItem = $("<p class='devour-burger'>").text(burger.id + ". " + burger.name);
+  let deleteBtn = $("<button type='button' class='delete btn btn-primary btn-sm float-right'>Delete</button>");
 
-  let id = $(this).data("id"); //what does this mean?
-  $.ajax({
-    method: "PUT",
-    url: "/api/burgers/" + id,
-    data: { devoured: true }
-  }).then(getBurgers);
+  $(deleteBtn).data("burger-id", burger.id); //helped by jason
+
+  devouredBurgerLi.append(devouredBurgerItem, deleteBtn);
+  devouredContainerEl.append(devouredBurgerLi);
+
+  return devouredBurgerLi;
 }
 
 //add a new burger into database then update the view
@@ -89,17 +86,20 @@ function addBurger(event) {
   newBurgerEl.val(""); //set input empty
 }
 
-function createDevouredRow(burger) {
-  let devourBurgerRow = $("<div class='row devour-row justify-content-between'>");
-  let devouredBurgerItem = $("<p class='devour-burger'>").text(burger.id + ". " + burger.name);
-  let deleteBtn = $("<button type='button' class='delete btn btn-primary btn-sm float-right'>x</button>");
-  $(deleteBtn).data("burger-id", burger.id);
-  devourBurgerRow.append(devouredBurgerItem, deleteBtn);
-  return devourBurgerRow;
+//UPDATE a burger to 'devour: true' when clicking the devour button
+function devourBurger(event) {
+  event.preventDefault();
+  console.log("devourBurger fired")
+  let id = $(this).data("id"); //what does this mean?
+  $.ajax({
+    method: "PUT",
+    url: "/api/burgers/" + id,
+    data: { devoured: true }
+  }).then(getBurgers);
 }
 
 function deleteDevoured(event){
-  event.stopPropagation(); //-----won't affect the parent element
+  event.stopPropagation(); //won't affect the parent element
   console.log("delete fired");
   let id = $(this).data("burger-id"); //what's data?
   console.log(id);
@@ -119,5 +119,5 @@ function deleteDevoured(event){
   //   "</span>",
   //   "<input type='text' style='display: none;'>"
   // ].join("");
-  // newBurgerRow.append(burgerItem, devourBtn);
+  // newBurgerLi.append(burgerItem, devourBtn);
   // devouredBurgerRow.data("burger", burger);

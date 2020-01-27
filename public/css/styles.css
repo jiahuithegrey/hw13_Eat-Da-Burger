@@ -28,24 +28,15 @@ textarea{
   font-size: 12px;
   margin-top: 5px;
 }
-.burger-item{
+.burger-item, .devour-burger{
   background-color: white;
   width: 60%;
   padding: 30px auto;
   margin-bottom: 0px;
 }
-.devour-row{
-  background-color: lightgray;
-}
 .devour-burger{
   padding: auto 10px;
   margin: 0;
-}
-.devour-row{
-  border: 1px solid red;
-}
-button.delete{
-  border: 1px solid black;
 }
 .btn {
   background-color: #FCC64F;
