@@ -6,7 +6,7 @@ body{
   background-color: #FCC64F;
 }
 .container{
-  background-color: #fef0d5;
+  background-color: #FFF8DE;
   min-height: 100vh;
 }
 /* #header-img{
@@ -48,11 +48,11 @@ button.delete{
   border: 1px solid black;
 }
 .btn {
-  background-color: #d5e3fe;
-  border-color: #a3c2fd;
+  background-color: #FCC64F;
   color: black;
+  border: none;
 }
 .btn:hover {
-  background-color: #a3c2fd;
-  border-color: #a3c2fd;
+  color: white;
+  background-color: #f89959;
 }
