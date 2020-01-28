@@ -40,15 +40,17 @@ function createNewRow(burger) {
   let newBurgerLi = $("<li class='row justify-content-between px-3 my-2'>");
 
   let burgerItem = $("<p class='burger-item text-center'>").text(burger.id + ". " + burger.name);
-  let devourBtn = $("<button type='button' class='btn btn-primary btn-sm float-right devour'>Devour it!</button>");
+  let devourBtn = $("<button type='button' class='devour btn btn-sm float-right'>Devour it!</button>");
 
+  $(devourBtn).data("burger-id", burger.id);
+  
   newBurgerLi.append(burgerItem, devourBtn);
   burgerContainerEl.append(newBurgerLi);
 
   //find() method returns the value of the first element in the provided array ???????????????????
   //that satisfies the provided testing function.
-  newBurgerLi.find("button.devour").data("id", burger.id);
-  newBurgerLi.data("burger", burger); //what does this mean?????
+  // newBurgerLi.find("button.devour").data("id", burger.id);
+  // newBurgerLi.data("burger", burger); //what does this mean?????
 
   newBurgerLi.find("button.devour").click(devourBurger);
 
@@ -57,8 +59,8 @@ function createNewRow(burger) {
 
 function createDevouredRow(burger) {
   let devouredBurgerLi = $("<li class='row devour-row justify-content-between px-3 my-2'>");
-  let devouredBurgerItem = $("<p class='devour-burger'>").text(burger.id + ". " + burger.name);
-  let deleteBtn = $("<button type='button' class='delete btn btn-primary btn-sm float-right'>Delete</button>");
+  let devouredBurgerItem = $("<p class='devour-burger text-center'>").text(burger.id + ". " + burger.name);
+  let deleteBtn = $("<button type='button' class='delete btn btn-sm float-right'>Delete</button>");
 
   $(deleteBtn).data("burger-id", burger.id); //helped by jason
 
@@ -88,9 +90,10 @@ function addBurger(event) {
 
 //UPDATE a burger to 'devour: true' when clicking the devour button
 function devourBurger(event) {
-  event.preventDefault();
-  console.log("devourBurger fired")
+  event.stopPropagation();
+  console.log("devourBurger fired");
   let id = $(this).data("id"); //what does this mean?
+  console.log(id);
   $.ajax({
     method: "PUT",
     url: "/api/burgers/" + id,
@@ -100,9 +103,8 @@ function devourBurger(event) {
 
 function deleteDevoured(event){
   event.stopPropagation(); //won't affect the parent element
-  console.log("delete fired");
+
   let id = $(this).data("burger-id"); //what's data?
-  console.log(id);
 
   $.ajax({
     method: "DELETE",
