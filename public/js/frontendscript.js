@@ -51,8 +51,7 @@ function createNewRow(burger) {
   //that satisfies the provided testing function.
   newBurgerLi.find("button.devour").data("id", burger.id);
   newBurgerLi.data("burger", burger); //what does this mean?????
-
-  // newBurgerLi.find("button.devour").click(devourBurger); --this line is useless
+  newBurgerLi.find("button.devour").click(devourBurger); 
 
   return newBurgerLi;
 }
