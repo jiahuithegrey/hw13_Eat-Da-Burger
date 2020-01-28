@@ -42,17 +42,17 @@ function createNewRow(burger) {
   let burgerItem = $("<p class='burger-item text-center'>").text(burger.id + ". " + burger.name);
   let devourBtn = $("<button type='button' class='devour btn btn-sm float-right'>Devour it!</button>");
 
-  $(devourBtn).data("burger-id", burger.id);
+  // $(devourBtn).data("burger-id", burger.id); Why this line doesnt work??????????
   
   newBurgerLi.append(burgerItem, devourBtn);
   burgerContainerEl.append(newBurgerLi);
 
   //find() method returns the value of the first element in the provided array ???????????????????
   //that satisfies the provided testing function.
-  // newBurgerLi.find("button.devour").data("id", burger.id);
-  // newBurgerLi.data("burger", burger); //what does this mean?????
+  newBurgerLi.find("button.devour").data("id", burger.id);
+  newBurgerLi.data("burger", burger); //what does this mean?????
 
-  newBurgerLi.find("button.devour").click(devourBurger);
+  // newBurgerLi.find("button.devour").click(devourBurger);
 
   return newBurgerLi;
 }
