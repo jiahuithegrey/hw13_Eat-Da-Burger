@@ -39,7 +39,7 @@ function initializeRows() {
 function createNewRow(burger) {
   let newBurgerLi = $("<li class='row justify-content-between px-3 my-2'>");
 
-  let burgerItem = $("<p class='burger-item text-center'>").text(burger.id + ". " + burger.name);
+  let burgerItem = $("<p class='burger-item text-center py-1'>").text(burger.id + ". " + burger.name);
   let devourBtn = $("<button type='button' class='devour btn btn-sm float-right' data-toggle='modal' data-target='devourModal'>Devour it!</button>");
 
   // $(devourBtn).data("burger-id", burger.id); Why this line doesnt work??????????
@@ -57,8 +57,8 @@ function createNewRow(burger) {
 }
 
 function createDevouredRow(burger) {
-  let devouredBurgerLi = $("<li class='row devour-row justify-content-between px-3 my-2'>");
-  let devouredBurgerItem = $("<p class='devour-burger text-center'>").text(burger.id + ". " + burger.name);
+  let devouredBurgerLi = $("<li class='row devour-row justify-content-between px-3 my-1'>");
+  let devouredBurgerItem = $("<p class='devour-burger text-center py-1'>").text(burger.id + ". " + burger.name);
   let deleteBtn = $("<button type='button' class='delete btn btn-sm float-right'>Delete</button>");
 
   $(deleteBtn).data("burger-id", burger.id); //helped by jason
