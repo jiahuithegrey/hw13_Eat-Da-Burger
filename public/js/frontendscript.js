@@ -40,7 +40,7 @@ function createNewRow(burger) {
   let newBurgerLi = $("<li class='row justify-content-between px-3 my-2'>");
 
   let burgerItem = $("<p class='burger-item text-center'>").text(burger.id + ". " + burger.name);
-  let devourBtn = $("<button type='button' class='devour btn btn-sm float-right'>Devour it!</button>");
+  let devourBtn = $("<button type='button' class='devour btn btn-sm float-right' data-toggle='modal' data-target='devourModal'>Devour it!</button>");
 
   // $(devourBtn).data("burger-id", burger.id); Why this line doesnt work??????????
   
@@ -52,7 +52,7 @@ function createNewRow(burger) {
   newBurgerLi.find("button.devour").data("id", burger.id);
   newBurgerLi.data("burger", burger); //what does this mean?????
 
-  // newBurgerLi.find("button.devour").click(devourBurger);
+  // newBurgerLi.find("button.devour").click(devourBurger); --this line is useless
 
   return newBurgerLi;
 }
@@ -123,3 +123,8 @@ function deleteDevoured(event){
   // ].join("");
   // newBurgerLi.append(burgerItem, devourBtn);
   // devouredBurgerRow.data("burger", burger);
+
+  // .data( key, value )
+  // https://api.jquery.com/data/
+  
+
