@@ -40,18 +40,18 @@ function createNewRow(burger) {
   let newBurgerLi = $("<li class='row justify-content-between px-3 my-2'>");
 
   let burgerItem = $("<p class='burger-item text-center py-1'>").text(burger.id + ". " + burger.name);
-  let devourBtn = $("<button type='button' class='devour btn btn-sm float-right' data-toggle='modal' data-target='devourModal'>Devour it!</button>");
+  let devourBtn = $("<button type='button' class='devour btn btn-sm float-right' data-toggle='modal' data-target='#devourModal'>Devour it!</button>");
 
-  // $(devourBtn).data("burger-id", burger.id); Why this line doesnt work??????????
+  $(devourBtn).data("burger-id", burger.id); //Why this line doesnt work??????????
   
   newBurgerLi.append(burgerItem, devourBtn);
   burgerContainerEl.append(newBurgerLi);
 
   //find() method returns the value of the first element in the provided array ???????????????????
   //that satisfies the provided testing function.
-  newBurgerLi.find("button.devour").data("id", burger.id);
-  newBurgerLi.data("burger", burger); //what does this mean?????
-  newBurgerLi.find("button.devour").click(devourBurger); 
+  //newBurgerLi.find("button.devour").data("id", burger.id);
+  //newBurgerLi.data("burger", burger); //what does this mean?????
+  //newBurgerLi.find("button.devour").click(devourBurger); 
 
   return newBurgerLi;
 }
@@ -91,7 +91,7 @@ function addBurger(event) {
 function devourBurger(event) {
   event.stopPropagation();
   console.log("devourBurger fired");
-  let id = $(this).data("id"); //what does this mean?
+  let id = $(this).data("burger-id"); //what does this mean?
   console.log(id);
   $.ajax({
     method: "PUT",
